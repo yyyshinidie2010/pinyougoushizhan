@@ -67,7 +67,7 @@
   </sql>
   <sql id="Base_Column_List" >
     <if test="fields == null" >
-      id, name, first_char, birthday
+      id, name, first_char
     </if>
     <if test="fields != null" >
       ${fields}
@@ -198,4 +198,11 @@
       birthday = #{birthday,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+ <!-- //查询所有品牌返回值  List<Map
+        public List<Map> selectOptionList();-->
+    <select id="selectOptionList"  resultType="map">
+      select id ,name text from tb_brand
+    </select>
 </mapper>

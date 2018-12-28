@@ -1,29 +1,47 @@
 package cn.itcast.core.pojo.item;
 
+import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.solr.core.mapping.Dynamic;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
 
 public class Item implements Serializable {
-    /**
-     * 商品id，同时也是商品编号
-     */
+
+
+    @Field
     private Long id;
 
-    /**
-     * 商品标题
-     */
+    @Field("item_title")
     private String title;
+
+    @Field("item_price")
+    private BigDecimal price;
+
+    @Field("item_image")
+    private String image;
+
+    @Field("item_goodsid")
+    private Long goodsId;
+
+    @Field("item_category")
+    private String category;
+
+    @Field("item_brand")
+    private String brand;
+
+    @Field("item_seller")
+    private String seller;
+
 
     /**
      * 商品卖点
      */
     private String sellPoint;
 
-    /**
-     * 商品价格，单位为：元
-     */
-    private BigDecimal price;
+
 
     private Integer stockCount;
 
@@ -37,10 +55,7 @@ public class Item implements Serializable {
      */
     private String barcode;
 
-    /**
-     * 商品图片
-     */
-    private String image;
+
 
     /**
      * 所属类目，叶子类目
@@ -60,6 +75,7 @@ public class Item implements Serializable {
     /**
      * 更新时间
      */
+    @Field("item_updatetime")
     private Date updateTime;
 
     private String itemSn;
@@ -70,19 +86,29 @@ public class Item implements Serializable {
 
     private String isDefault;
 
-    private Long goodsId;
+
 
     private String sellerId;
 
     private String cartThumbnail;
 
-    private String category;
 
-    private String brand;
 
+    // {"网络":"移动4G","机身内存":"64G"}    Map  map = JSON.parseObject(s,Map.class)
     private String spec;
 
-    private String seller;
+    //扩展的属性
+    @Dynamic
+    @Field("item_spec_*")
+    private Map<String,String> specMap;
+
+    public Map<String, String> getSpecMap() {
+        return specMap;
+    }
+
+    public void setSpecMap(Map<String, String> specMap) {
+        this.specMap = specMap;
+    }
 
     private static final long serialVersionUID = 1L;
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Brand implements Serializable {
-    private Long id;
+    private Long id;  //int Integer bigint Long
 
     /**
      * 品牌名称

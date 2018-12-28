@@ -3,6 +3,8 @@ package cn.itcast.core.dao.good;
 import cn.itcast.core.pojo.good.Brand;
 import cn.itcast.core.pojo.good.BrandQuery;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface BrandDao {
@@ -27,4 +29,6 @@ public interface BrandDao {
     int updateByPrimaryKeySelective(Brand record);
 
     int updateByPrimaryKey(Brand record);
+    //查询所有品牌返回值  List<Map
+    public List<Map> selectOptionList();
 }
