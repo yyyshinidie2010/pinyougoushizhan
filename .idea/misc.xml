@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/parent327/pinyougou-service-buyer" />
+    <file type="web" url="file://$PROJECT_DIR$/parent327/pinyougou-service-page" />
+    <file type="web" url="file://$PROJECT_DIR$/parent327/pinyougou-service-search" />
+    <file type="web" url="file://$PROJECT_DIR$/parent327/pinyougou-service-sellergoods" />
+    <file type="web" url="file://$PROJECT_DIR$/parent327/pinyougou-service-user" />
+    <file type="web" url="file://$PROJECT_DIR$/parent327/pinyougou-web-manager" />
+    <file type="web" url="file://$PROJECT_DIR$/parent327/pinyougou-web-portal" />
+    <file type="web" url="file://$PROJECT_DIR$/parent327/pinyougou-web-shop" />
+    <file type="web" url="file://$PROJECT_DIR$/parent327/pinyougou-web-user" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/parent327/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
