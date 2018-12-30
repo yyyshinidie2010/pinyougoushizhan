@@ -1,5 +1,5 @@
  //控制层 
-app.controller('itemCatController' ,function($scope,$controller   ,itemCatService){	
+app.controller('itemCatController' ,function($scope,$controller,itemCatService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -64,7 +64,7 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 			}		
 		);				
 	}
-	
+
 	$scope.searchEntity={};//定义搜索对象 
 	
 	//搜索
@@ -107,15 +107,23 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 		
 		$scope.findByParentId(p_entity.id);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+    // 审核的方法:
+    $scope.updateStatus = function(status){
+        itemCatService.updateStatus($scope.selectIds,status).success(function(response){
+            if(response.flag){
+                $scope.reloadList();//刷新列表
+                $scope.selectIds = [];
+            }else{
+                alert(response.message);
+            }
+        });
+    }
+
+    // 显示状态
+    $scope.status = ["未审核","审核通过","审核未通过","关闭"];
 	
     
 });	

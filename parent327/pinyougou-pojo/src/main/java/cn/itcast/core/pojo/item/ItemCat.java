@@ -23,6 +23,10 @@ public class ItemCat implements Serializable {
      */
     private Long typeId;
 
+    private String sellerId;
+
+    private String auditStatus;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -57,6 +61,22 @@ public class ItemCat implements Serializable {
         this.typeId = typeId;
     }
 
+    public String getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId == null ? null : sellerId.trim();
+    }
+
+    public String getAuditStatus() {
+        return auditStatus;
+    }
+
+    public void setAuditStatus(String auditStatus) {
+        this.auditStatus = auditStatus == null ? null : auditStatus.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -67,6 +87,8 @@ public class ItemCat implements Serializable {
         sb.append(", parentId=").append(parentId);
         sb.append(", name=").append(name);
         sb.append(", typeId=").append(typeId);
+        sb.append(", sellerId=").append(sellerId);
+        sb.append(", auditStatus=").append(auditStatus);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -87,7 +109,9 @@ public class ItemCat implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getTypeId() == null ? other.getTypeId() == null : this.getTypeId().equals(other.getTypeId()));
+            && (this.getTypeId() == null ? other.getTypeId() == null : this.getTypeId().equals(other.getTypeId()))
+            && (this.getSellerId() == null ? other.getSellerId() == null : this.getSellerId().equals(other.getSellerId()))
+            && (this.getAuditStatus() == null ? other.getAuditStatus() == null : this.getAuditStatus().equals(other.getAuditStatus()));
     }
 
     @Override
@@ -98,6 +122,8 @@ public class ItemCat implements Serializable {
         result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getTypeId() == null) ? 0 : getTypeId().hashCode());
+        result = prime * result + ((getSellerId() == null) ? 0 : getSellerId().hashCode());
+        result = prime * result + ((getAuditStatus() == null) ? 0 : getAuditStatus().hashCode());
         return result;
     }
 }

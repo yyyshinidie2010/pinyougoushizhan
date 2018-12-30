@@ -7,6 +7,8 @@
     <result column="spec_ids" property="specIds" jdbcType="VARCHAR" />
     <result column="brand_ids" property="brandIds" jdbcType="VARCHAR" />
     <result column="custom_attribute_items" property="customAttributeItems" jdbcType="VARCHAR" />
+    <result column="seller_id" property="sellerId" jdbcType="VARCHAR" />
+    <result column="audit_status" property="auditStatus" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +70,7 @@
   </sql>
   <sql id="Base_Column_List" >
     <if test="fields == null" >
-      id, name, spec_ids, brand_ids, custom_attribute_items
+      id, name, spec_ids, brand_ids, custom_attribute_items, seller_id, audit_status
     </if>
     <if test="fields != null" >
       ${fields}
@@ -90,7 +92,7 @@
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
-    id,name,spec_ids,brand_ids,custom_attribute_items
+    id,name,spec_ids,brand_ids,custom_attribute_items,seller_id,audit_status
     from tb_type_template
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -106,9 +108,11 @@
   </delete>
   <insert id="insert" parameterType="cn.itcast.core.pojo.template.TypeTemplate" >
     insert into tb_type_template (id, name, spec_ids, 
-      brand_ids, custom_attribute_items)
+      brand_ids, custom_attribute_items, seller_id, 
+      audit_status)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{specIds,jdbcType=VARCHAR}, 
-      #{brandIds,jdbcType=VARCHAR}, #{customAttributeItems,jdbcType=VARCHAR})
+      #{brandIds,jdbcType=VARCHAR}, #{customAttributeItems,jdbcType=VARCHAR}, #{sellerId,jdbcType=VARCHAR}, 
+      #{auditStatus,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.itcast.core.pojo.template.TypeTemplate" >
     insert into tb_type_template
@@ -128,6 +132,12 @@
       <if test="customAttributeItems != null" >
         custom_attribute_items,
       </if>
+      <if test="sellerId != null" >
+        seller_id,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -144,6 +154,12 @@
       </if>
       <if test="customAttributeItems != null" >
         #{customAttributeItems,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerId != null" >
+        #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -171,6 +187,12 @@
       <if test="record.customAttributeItems != null" >
         custom_attribute_items = #{record.customAttributeItems,jdbcType=VARCHAR},
       </if>
+      <if test="record.sellerId != null" >
+        seller_id = #{record.sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditStatus != null" >
+        audit_status = #{record.auditStatus,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -182,7 +204,9 @@
       name = #{record.name,jdbcType=VARCHAR},
       spec_ids = #{record.specIds,jdbcType=VARCHAR},
       brand_ids = #{record.brandIds,jdbcType=VARCHAR},
-      custom_attribute_items = #{record.customAttributeItems,jdbcType=VARCHAR}
+      custom_attribute_items = #{record.customAttributeItems,jdbcType=VARCHAR},
+      seller_id = #{record.sellerId,jdbcType=VARCHAR},
+      audit_status = #{record.auditStatus,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -202,6 +226,12 @@
       <if test="customAttributeItems != null" >
         custom_attribute_items = #{customAttributeItems,jdbcType=VARCHAR},
       </if>
+      <if test="sellerId != null" >
+        seller_id = #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -210,7 +240,13 @@
     set name = #{name,jdbcType=VARCHAR},
       spec_ids = #{specIds,jdbcType=VARCHAR},
       brand_ids = #{brandIds,jdbcType=VARCHAR},
-      custom_attribute_items = #{customAttributeItems,jdbcType=VARCHAR}
+      custom_attribute_items = #{customAttributeItems,jdbcType=VARCHAR},
+      seller_id = #{sellerId,jdbcType=VARCHAR},
+      audit_status = #{auditStatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="findByTypetemplateList" resultType="map">
+    select id ,name text from tb_type_template;
+  </select>
 </mapper>

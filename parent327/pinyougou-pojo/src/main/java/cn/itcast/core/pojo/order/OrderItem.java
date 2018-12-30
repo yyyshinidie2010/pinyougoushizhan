@@ -2,13 +2,12 @@ package cn.itcast.core.pojo.order;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class OrderItem implements Serializable {
     private Long id;
 
     /**
-     * 库存 id
+     * 商品id
      */
     private Long itemId;
 
@@ -153,16 +152,43 @@ public class OrderItem implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderItem orderItem = (OrderItem) o;
-        return Objects.equals(itemId, orderItem.itemId);
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        OrderItem other = (OrderItem) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getItemId() == null ? other.getItemId() == null : this.getItemId().equals(other.getItemId()))
+            && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
+            && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()))
+            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+            && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
+            && (this.getNum() == null ? other.getNum() == null : this.getNum().equals(other.getNum()))
+            && (this.getTotalFee() == null ? other.getTotalFee() == null : this.getTotalFee().equals(other.getTotalFee()))
+            && (this.getPicPath() == null ? other.getPicPath() == null : this.getPicPath().equals(other.getPicPath()))
+            && (this.getSellerId() == null ? other.getSellerId() == null : this.getSellerId().equals(other.getSellerId()));
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(itemId);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getItemId() == null) ? 0 : getItemId().hashCode());
+        result = prime * result + ((getGoodsId() == null) ? 0 : getGoodsId().hashCode());
+        result = prime * result + ((getOrderId() == null) ? 0 : getOrderId().hashCode());
+        result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
+        result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
+        result = prime * result + ((getNum() == null) ? 0 : getNum().hashCode());
+        result = prime * result + ((getTotalFee() == null) ? 0 : getTotalFee().hashCode());
+        result = prime * result + ((getPicPath() == null) ? 0 : getPicPath().hashCode());
+        result = prime * result + ((getSellerId() == null) ? 0 : getSellerId().hashCode());
+        return result;
     }
 }

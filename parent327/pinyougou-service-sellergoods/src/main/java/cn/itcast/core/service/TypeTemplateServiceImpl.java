@@ -6,6 +6,7 @@ import cn.itcast.core.pojo.good.Brand;
 import cn.itcast.core.pojo.specification.SpecificationOption;
 import cn.itcast.core.pojo.specification.SpecificationOptionQuery;
 import cn.itcast.core.pojo.template.TypeTemplate;
+import cn.itcast.core.pojo.template.TypeTemplateQuery;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
@@ -34,27 +35,37 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 
     @Override
     public PageResult search(Integer page, Integer rows, TypeTemplate typeTemplate) {
-        //1:从Mysql查询所有模板对象结果集
-        List<TypeTemplate> typeTemplates = typeTemplateDao.selectByExample(null);
-        //2:将上面的结果集保存缓存(Hash类型)
-        for (TypeTemplate t : typeTemplates) {
-           /* hash
-            K:模板ID V:品牌列表
-                    hash
-            K:模板ID V:规格列表*/
-             //[{"id":52,"text":"宝马"},{"id":53,"text":"法拉利"},{"id":54,"text":"蓝博基尼"}]
-            redisTemplate.boundHashOps("brandList").put(t.getId(),JSON.parseArray(t.getBrandIds(), Map.class));
-            //[{"id":45,"text":"汽车颜色"},{"id":46,"text":"汽车排量"}]
-            redisTemplate.boundHashOps("specList").put(t.getId(),findBySpecList(t.getId()));
+//        //1:从Mysql查询所有模板对象结果集
+//        List<TypeTemplate> typeTemplates = typeTemplateDao.selectByExample(null);
+//        //2:将上面的结果集保存缓存(Hash类型)
+//        for (TypeTemplate t : typeTemplates) {
+//           /* hash
+//            K:模板ID V:品牌列表
+//                    hash
+//            K:模板ID V:规格列表*/
+//             //[{"id":52,"text":"宝马"},{"id":53,"text":"法拉利"},{"id":54,"text":"蓝博基尼"}]
+//            redisTemplate.boundHashOps("brandList").put(t.getId(),JSON.parseArray(t.getBrandIds(), Map.class));
+//            //[{"id":45,"text":"汽车颜色"},{"id":46,"text":"汽车排量"}]
+//            redisTemplate.boundHashOps("specList").put(t.getId(),findBySpecList(t.getId()));
+//
+//        }
 
-        }
-
-
+//        BrandQuery brandQuery = new BrandQuery();
+//
+//        BrandQuery.Criteria criteria = brandQuery.createCriteria();
+//        if (null != brand.getAuditStatus() && !"".equals(brand.getAuditStatus())) {
+//            criteria.andAuditStatusEqualTo(brand.getAuditStatus());
+//        }
 
         //分页插件
         PageHelper.startPage(page, rows);
         PageHelper.orderBy("id desc");
-        Page<TypeTemplate> p = (Page<TypeTemplate>) typeTemplateDao.selectByExample(null);
+        TypeTemplateQuery typeTemplateQuery = new TypeTemplateQuery();
+        TypeTemplateQuery.Criteria criteria = typeTemplateQuery.createCriteria();
+        if (null != typeTemplate.getAuditStatus() && !"".equals(typeTemplate.getAuditStatus())) {
+            criteria.andAuditStatusEqualTo(typeTemplate.getAuditStatus());
+        }
+        Page<TypeTemplate> p = (Page<TypeTemplate>) typeTemplateDao.selectByExample(typeTemplateQuery);
         return new PageResult(p.getTotal(), p.getResult());
     }
 
@@ -93,5 +104,15 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
         }
 
         return listMap;
+    }
+
+    @Override
+    public void updateStatus(Long[] ids, String status) {
+        TypeTemplate typeTemplate = new TypeTemplate();
+        typeTemplate.setAuditStatus(status);
+        for (Long id : ids) {
+            typeTemplate.setId(id);
+            typeTemplateDao.updateByPrimaryKeySelective(typeTemplate);
+        }
     }
 }

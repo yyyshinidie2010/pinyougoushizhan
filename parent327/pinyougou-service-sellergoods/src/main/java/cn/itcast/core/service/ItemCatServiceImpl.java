@@ -4,6 +4,9 @@ import cn.itcast.core.dao.item.ItemCatDao;
 import cn.itcast.core.pojo.item.ItemCat;
 import cn.itcast.core.pojo.item.ItemCatQuery;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import entity.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,5 +45,29 @@ public class ItemCatServiceImpl implements  ItemCatService {
     @Override
     public List<ItemCat> findAll() {
         return itemCatDao.selectByExample(null);
+    }
+
+    @Override
+    public PageResult search(Integer page, Integer rows, ItemCat itemCat) {
+        //分页插件
+        PageHelper.startPage(page, rows);
+        PageHelper.orderBy("id desc");
+        ItemCatQuery itemCatQuery = new ItemCatQuery();
+        ItemCatQuery.Criteria criteria = itemCatQuery.createCriteria();
+        if (null != itemCat.getAuditStatus() && !"".equals(itemCat.getAuditStatus())) {
+            criteria.andAuditStatusEqualTo(itemCat.getAuditStatus());
+        }
+        Page<ItemCat> p = (Page<ItemCat>) itemCatDao.selectByExample(itemCatQuery);
+        return new PageResult(p.getTotal(), p.getResult());
+    }
+
+    @Override
+    public void updateStatus(Long[] ids, String status) {
+        ItemCat itemCat = new ItemCat();
+        itemCat.setAuditStatus(status);
+        for (Long id : ids) {
+            itemCat.setId(id);
+            itemCatDao.updateByPrimaryKeySelective(itemCat);
+        }
     }
 }

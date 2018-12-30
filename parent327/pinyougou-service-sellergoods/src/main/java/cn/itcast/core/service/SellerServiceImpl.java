@@ -6,6 +6,9 @@ import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+import java.util.List;
 
 /**
  * 商家管理
@@ -29,4 +32,11 @@ public class SellerServiceImpl implements  SellerService {
     public Seller findOne(String sellerId) {
         return sellerDao.selectByPrimaryKey(sellerId);
     }
+
+    @Override
+    public List<Seller> findAll() {
+        return sellerDao.selectByExample(null);
+    }
+
+
 }

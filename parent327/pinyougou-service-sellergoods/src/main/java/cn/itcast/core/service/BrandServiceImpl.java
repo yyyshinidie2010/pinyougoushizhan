@@ -57,6 +57,9 @@ public class BrandServiceImpl implements  BrandService {
         if(null != brand.getFirstChar() && !"".equals(brand.getFirstChar().trim())){
             criteria.andFirstCharEqualTo(brand.getFirstChar().trim());
         }
+        if (null != brand.getAuditStatus() && !"".equals(brand.getAuditStatus())) {
+            criteria.andAuditStatusEqualTo(brand.getAuditStatus());
+        }
         //查询
         Page<Brand> p = (Page<Brand>) brandDao.selectByExample(brandQuery);
 
@@ -66,6 +69,18 @@ public class BrandServiceImpl implements  BrandService {
     @Override
     public List<Map> selectOptionList() {
         return brandDao.selectOptionList();
+    }
+
+    @Override
+    public void updateStatus(Long[] ids, String status) {
+        Brand brand = new Brand();
+        brand.setAuditStatus(status);
+        //品牌表ID
+        for (Long id : ids) {
+            brand.setId(id);
+            //1:品牌状态更改
+            brandDao.updateByPrimaryKeySelective(brand);
+        }
     }
 
     @Override

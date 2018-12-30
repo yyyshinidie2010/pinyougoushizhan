@@ -5,6 +5,7 @@ import cn.itcast.core.dao.specification.SpecificationOptionDao;
 import cn.itcast.core.pojo.specification.Specification;
 import cn.itcast.core.pojo.specification.SpecificationOption;
 import cn.itcast.core.pojo.specification.SpecificationOptionQuery;
+import cn.itcast.core.pojo.specification.SpecificationQuery;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -32,8 +33,14 @@ public class SpecificationServiceImpl implements  SpecificationService {
     public PageResult search(Integer page, Integer rows, Specification specification) {
         //分页插件
         PageHelper.startPage(page,rows);
+
+        SpecificationQuery specificationQuery = new SpecificationQuery();
+        SpecificationQuery.Criteria criteria = specificationQuery.createCriteria();
+        if (null != specification.getAuditStatus() && !"".equals(specification.getAuditStatus())) {
+            criteria.andAuditStatusEqualTo(specification.getAuditStatus());
+        }
         //查询 分页
-        Page<Specification> p = (Page<Specification>) specificationDao.selectByExample(null);
+        Page<Specification> p = (Page<Specification>) specificationDao.selectByExample(specificationQuery);
 
         return new PageResult(p.getTotal(),p.getResult());
     }
@@ -101,6 +108,16 @@ public class SpecificationServiceImpl implements  SpecificationService {
     @Override
     public List<Map> selectOptionList() {
         return specificationDao.selectOptionList();
+    }
+
+    @Override
+    public void updateStatus(Long[] ids, String status) {
+        Specification specification = new Specification();
+        specification.setAuditStatus(status);
+        for (Long id : ids) {
+            specification.setId(id);
+            specificationDao.updateByPrimaryKeySelective(specification);
+        }
     }
 
 }

@@ -17,4 +17,6 @@ public interface SpecificationService {
     void update(SpecificationVo vo);
 
     List<Map> selectOptionList();
+
+    void updateStatus(Long[] ids, String status);
 }

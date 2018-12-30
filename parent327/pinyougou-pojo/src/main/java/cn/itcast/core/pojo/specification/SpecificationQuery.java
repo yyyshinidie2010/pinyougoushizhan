@@ -243,6 +243,146 @@ public class SpecificationQuery {
             addCriterion("spec_name not between", value1, value2, "specName");
             return (Criteria) this;
         }
+
+        public Criteria andSellerIdIsNull() {
+            addCriterion("seller_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdIsNotNull() {
+            addCriterion("seller_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdEqualTo(String value) {
+            addCriterion("seller_id =", value, "sellerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdNotEqualTo(String value) {
+            addCriterion("seller_id <>", value, "sellerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdGreaterThan(String value) {
+            addCriterion("seller_id >", value, "sellerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdGreaterThanOrEqualTo(String value) {
+            addCriterion("seller_id >=", value, "sellerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdLessThan(String value) {
+            addCriterion("seller_id <", value, "sellerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdLessThanOrEqualTo(String value) {
+            addCriterion("seller_id <=", value, "sellerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdLike(String value) {
+            addCriterion("seller_id like", value, "sellerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdNotLike(String value) {
+            addCriterion("seller_id not like", value, "sellerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdIn(List<String> values) {
+            addCriterion("seller_id in", values, "sellerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdNotIn(List<String> values) {
+            addCriterion("seller_id not in", values, "sellerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdBetween(String value1, String value2) {
+            addCriterion("seller_id between", value1, value2, "sellerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSellerIdNotBetween(String value1, String value2) {
+            addCriterion("seller_id not between", value1, value2, "sellerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusIsNull() {
+            addCriterion("audit_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusIsNotNull() {
+            addCriterion("audit_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusEqualTo(String value) {
+            addCriterion("audit_status =", value, "auditStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusNotEqualTo(String value) {
+            addCriterion("audit_status <>", value, "auditStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusGreaterThan(String value) {
+            addCriterion("audit_status >", value, "auditStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("audit_status >=", value, "auditStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusLessThan(String value) {
+            addCriterion("audit_status <", value, "auditStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusLessThanOrEqualTo(String value) {
+            addCriterion("audit_status <=", value, "auditStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusLike(String value) {
+            addCriterion("audit_status like", value, "auditStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusNotLike(String value) {
+            addCriterion("audit_status not like", value, "auditStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusIn(List<String> values) {
+            addCriterion("audit_status in", values, "auditStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusNotIn(List<String> values) {
+            addCriterion("audit_status not in", values, "auditStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusBetween(String value1, String value2) {
+            addCriterion("audit_status between", value1, value2, "auditStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuditStatusNotBetween(String value1, String value2) {
+            addCriterion("audit_status not between", value1, value2, "auditStatus");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

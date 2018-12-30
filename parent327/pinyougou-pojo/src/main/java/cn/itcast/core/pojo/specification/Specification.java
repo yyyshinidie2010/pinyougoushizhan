@@ -13,6 +13,10 @@ public class Specification implements Serializable {
      */
     private String specName;
 
+    private String sellerId;
+
+    private String auditStatus;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -31,6 +35,22 @@ public class Specification implements Serializable {
         this.specName = specName == null ? null : specName.trim();
     }
 
+    public String getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId == null ? null : sellerId.trim();
+    }
+
+    public String getAuditStatus() {
+        return auditStatus;
+    }
+
+    public void setAuditStatus(String auditStatus) {
+        this.auditStatus = auditStatus == null ? null : auditStatus.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -39,6 +59,8 @@ public class Specification implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", specName=").append(specName);
+        sb.append(", sellerId=").append(sellerId);
+        sb.append(", auditStatus=").append(auditStatus);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -57,7 +79,9 @@ public class Specification implements Serializable {
         }
         Specification other = (Specification) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getSpecName() == null ? other.getSpecName() == null : this.getSpecName().equals(other.getSpecName()));
+            && (this.getSpecName() == null ? other.getSpecName() == null : this.getSpecName().equals(other.getSpecName()))
+            && (this.getSellerId() == null ? other.getSellerId() == null : this.getSellerId().equals(other.getSellerId()))
+            && (this.getAuditStatus() == null ? other.getAuditStatus() == null : this.getAuditStatus().equals(other.getAuditStatus()));
     }
 
     @Override
@@ -66,6 +90,8 @@ public class Specification implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getSpecName() == null) ? 0 : getSpecName().hashCode());
+        result = prime * result + ((getSellerId() == null) ? 0 : getSellerId().hashCode());
+        result = prime * result + ((getAuditStatus() == null) ? 0 : getAuditStatus().hashCode());
         return result;
     }
 }

@@ -3,6 +3,8 @@ package cn.itcast.core.dao.template;
 import cn.itcast.core.pojo.template.TypeTemplate;
 import cn.itcast.core.pojo.template.TypeTemplateQuery;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface TypeTemplateDao {
@@ -27,4 +29,6 @@ public interface TypeTemplateDao {
     int updateByPrimaryKeySelective(TypeTemplate record);
 
     int updateByPrimaryKey(TypeTemplate record);
+
+    List<Map> findByTypetemplateList();
 }
