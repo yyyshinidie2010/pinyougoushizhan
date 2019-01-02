@@ -100,7 +100,7 @@
     select 
     id,seckill_id,money,user_id,seller_id,create_time,pay_time,status,receiver_address,receiver_mobile,receiver,transaction_id
     from tb_seckill_order
-    where id = #{id,jdbcType=BIGINT}
+    where id =#{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tb_seckill_order
